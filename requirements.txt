@@ -36,6 +36,6 @@ uvloop==0.17.0
 watchfiles==0.18.1
 websockets==10.4
 # Mains
-python-pptx
-Spire.Presentation
-Spire
+python-pptx==0.6.22
+Spire.Presentation==8.9.0
+Spire==0.4.2
