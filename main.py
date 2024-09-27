@@ -11,7 +11,7 @@ from config import *
 import router.api_router as api_router
 
 app = FastAPI(
-    title="Cerify",
+    title="certify",
     description="This is an application as a service to store certificate for SOSC Events.",
     version="0.0.2",
     contact={

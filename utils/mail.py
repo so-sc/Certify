@@ -3,29 +3,26 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
-from config import EMAIL, PASS
+from config import email, password
 
-def sendEmail(name: str, email: str, result):
+def sendMail(name, mail, subject, body):
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = email
+    msg["To"] = mail
+    html_part = MIMEText(body, "html")
+    msg.attach(html_part)
     try:
-        html_content = f"""
-        <html>
-          <head></head>
-          <body>
-          {result}
-          </body>
-        </html>
-        """
-        message = MIMEMultipart()
-        message["From"] = EMAIL
-        message["To"] = email
-        message["Subject"] = "SOSC: Certificate of Participation"
-        message.attach(MIMEText(html_content, "html"))
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(EMAIL, PASS)
-        server.sendmail(EMAIL, email, message.as_string())
-        server.quit()
-        return {"success": True}
-    except Exception:
-        return {"success": False}
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(email, password)
+            server.sendmail(email, mail, msg.as_string())
+            print("Email sent successfully!")
+            return { "success": True, "message": "Email sent successfully" }
+        return { "success": False, "message": "Failed to send email" }
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+        return { "success": False, "message": "Failed to send email" }
