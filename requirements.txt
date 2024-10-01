@@ -36,6 +36,3 @@ uvicorn==0.20.0
 python-pptx==0.6.22
 Spire.Presentation==8.9.0
 Spire==0.4.2
-
-python-pptx
-fpdf

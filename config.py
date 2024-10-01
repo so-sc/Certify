@@ -1,6 +1,10 @@
-
-from dotenv import load_dotenv
+"""
+This module handles the configuration settings for the Certify project.
+It loads environment variables from a .env file and sets up email credentials 
+and template configurations.
+"""
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
